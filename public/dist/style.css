@@ -1,0 +1,438 @@
+html {
+  position: relative;
+  min-height: 100%; }
+
+body {
+  margin-bottom: 44px;
+  background-color: #f1f1f1;
+  overflow-x: hidden;
+  width: auto;
+  height: 100%;
+  min-height: 100vh;
+  -webkit-transition: 1s;
+  -o-transition: 1s;
+  transition: 1s; }
+
+footer {
+  position: absolute;
+  width: 100%;
+  height: 44px;
+  padding: 10px 30px;
+  bottom: 0;
+  background-color: #fff;
+  border-top: 1px solid #e0e0e0; }
+
+.bootstrap-override h1, .bootstrap-override h2, .bootstrap-override h3 {
+  color: #4c4c4c;
+  font-family: 'Roboto', sans-serif; }
+
+h4, h5, h6, p, label, a, th {
+  color: #4c4c4c;
+  font-family: 'Open Sans', sans-serif; }
+
+.container {
+  width: 100%;
+  padding: 0; }
+
+.bootstrap-override .logo {
+  width: 300px;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 0px; }
+  @media screen and (max-width: 400px) {
+    .bootstrap-override .logo {
+      width: 100%; } }
+
+.bootstrap-override .navbar {
+  background: #FEFEFE !important;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); }
+  .bootstrap-override .navbar .nav {
+    position: relative;
+    left: -15px; }
+  .bootstrap-override .navbar a {
+    color: #4c4c4c;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 1.0px; }
+  .bootstrap-override .navbar:hover {
+    opacity: 1 !important; }
+
+.bootstrap-override .home-header {
+  padding-left: 0;
+  border-left: 10px solid #FD583F;
+  color: #FD583F !important;
+  text-decoration: none; }
+
+.bootstrap-override .title-name h2 {
+  width: 97%;
+  text-align: center;
+  color: #FD583F !important;
+  margin-top: 25px; }
+
+.bootstrap-override .info-main-text {
+  width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 75px; }
+  @media screen and (max-width: 420px) {
+    .bootstrap-override .info-main-text {
+      width: 100%; } }
+
+.bootstrap-override .title-text-of-page {
+  width: 100%;
+  text-align: center; }
+
+.bootstrap-override .main_content {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  float: left;
+  padding: 15px; }
+
+.bootstrap-override .inner {
+  height: auto;
+  min-height: 600px;
+  width: 100%; }
+  .bootstrap-override .inner .reddit-container .reddit-left {
+    width: 400px;
+    height: auto;
+    float: left;
+    padding-left: 15px;
+    clear: both; }
+    @media screen and (max-width: 400px) {
+      .bootstrap-override .inner .reddit-container .reddit-left {
+        width: 95%;
+        position: relative; } }
+    .bootstrap-override .inner .reddit-container .reddit-left button {
+      width: 125px;
+      height: 45px;
+      position: relative;
+      margin-top: 15px;
+      margin-right: 5px; }
+    @media screen and (max-width: 350px) {
+      .bootstrap-override .inner .reddit-container .reddit-left .reddit-reset-button {
+        margin-left: 6px; } }
+    .bootstrap-override .inner .reddit-container .reddit-left .reddit-form {
+      display: inline-block;
+      width: 300px;
+      top: 7px;
+      position: relative; }
+      @media screen and (max-width: 350px) {
+        .bootstrap-override .inner .reddit-container .reddit-left .reddit-form {
+          width: 95%;
+          position: relative;
+          left: 2.5%; } }
+    @media screen and (max-width: 350px) {
+      .bootstrap-override .inner .reddit-container .reddit-left .reddit-form-loader + button {
+        margin-left: 0px !important; } }
+  .bootstrap-override .inner .reddit-container .reddit-right {
+    float: right;
+    vertical-align: top;
+    width: 400px;
+    padding-right: 15px;
+    margin-top: 2px; }
+    @media screen and (min-width: 1380px) {
+      .bootstrap-override .inner .reddit-container .reddit-right {
+        width: 700px; } }
+    @media screen and (max-width: 800px) {
+      .bootstrap-override .inner .reddit-container .reddit-right {
+        width: 90%;
+        padding-right: 0;
+        left: 15px;
+        position: relative;
+        float: left;
+        margin-top: 25px; } }
+    @media screen and (max-width: 400px) {
+      .bootstrap-override .inner .reddit-container .reddit-right {
+        width: 90%;
+        position: relative;
+        left: 15px; } }
+
+.bootstrap-override .search-container {
+  padding-left: 15px;
+  /*width: 100%;*/
+  height: 100%;
+  position: relative; }
+  .bootstrap-override .search-container .search-input-bar {
+    display: inline-block;
+    width: 300px;
+    top: 7px;
+    position: relative; }
+    @media screen and (max-width: 400px) {
+      .bootstrap-override .search-container .search-input-bar {
+        width: 100%; } }
+  .bootstrap-override .search-container .search-area {
+    vertical-align: top;
+    min-height: 600px; }
+  .bootstrap-override .search-container .search-results {
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 600px;
+    width: 100%;
+    max-width: 445px;
+    background: white;
+    margin-bottom: 50px; }
+  .bootstrap-override .search-container .search-card {
+    width: 100%;
+    height: 75px;
+    padding-left: 15px;
+    padding-bottom: 5px;
+    overflow-y: hidden; }
+    .bootstrap-override .search-container .search-card h3 {
+      float: left;
+      width: 300px;
+      overflow: hidden; }
+    .bootstrap-override .search-container .search-card:nth-child(even) {
+      background: rgba(46, 46, 46, 0.4); }
+    .bootstrap-override .search-container .search-card:hover {
+      background: #FD583F;
+      cursor: pointer; }
+    .bootstrap-override .search-container .search-card .search-card-image {
+      height: 50px;
+      top: 12.5px;
+      width: 50px;
+      position: relative;
+      border: 1px solid black;
+      float: right;
+      vertical-align: top;
+      right: 12.5px; }
+  .bootstrap-override .search-container .search-info-sheet {
+    vertical-align: top;
+    /*width: 50%;*/
+    height: 600px;
+    padding: 15px; }
+
+.bootstrap-override .empty-div {
+  width: 100%;
+  height: 100%;
+  min-height: 95vh;
+  overflow: overlay;
+  overflow-y: hidden; }
+
+.bootstrap-override .menu-icon {
+  font-family: 'Open Sans', sans-serif;
+  color: #FD583F;
+  position: absolute;
+  z-index: 4; }
+  .bootstrap-override .menu-icon h5 {
+    margin: 10px 0px 0px 10px; }
+
+.bootstrap-override .logo-text {
+  position: absolute;
+  right: 15px;
+  color: white;
+  text-decoration: none;
+  z-index: 6; }
+  .bootstrap-override .logo-text a {
+    color: white;
+    pointer: cursor; }
+
+h2 {
+  font-size: 2.5em; }
+
+.bootstrap-override .centered-h2 {
+  width: 100%;
+  text-align: center;
+  position: relative;
+  top: 15px;
+  left: -25px;
+  font-family: 'Inconsolata', monospace; }
+
+.bootstrap-override .main_content {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  float: left;
+  padding: 15px;
+  /* edit Page */ }
+  .bootstrap-override .main_content .inner .login-page-container, .bootstrap-override .main_content .inner .edit-page-container {
+    width: 600px;
+    position: relative;
+    margin: 0 auto;
+    text-align: center; }
+    @media screen and (max-width: 600px) {
+      .bootstrap-override .main_content .inner .login-page-container, .bootstrap-override .main_content .inner .edit-page-container {
+        width: 95%;
+        left: 2.5%; } }
+    .bootstrap-override .main_content .inner .login-page-container label, .bootstrap-override .main_content .inner .edit-page-container label {
+      color: #4c4c4c; }
+    .bootstrap-override .main_content .inner .login-page-container .login-form, .bootstrap-override .main_content .inner .edit-page-container .login-form {
+      width: 400px;
+      margin: 0 auto;
+      position: relative;
+      color: white; }
+      @media screen and (max-width: 600px) {
+        .bootstrap-override .main_content .inner .login-page-container .login-form, .bootstrap-override .main_content .inner .edit-page-container .login-form {
+          width: 95%; } }
+      .bootstrap-override .main_content .inner .login-page-container .login-form form, .bootstrap-override .main_content .inner .login-page-container .login-form .form-group, .bootstrap-override .main_content .inner .edit-page-container .login-form form, .bootstrap-override .main_content .inner .edit-page-container .login-form .form-group {
+        width: 100%; }
+    .bootstrap-override .main_content .inner .login-page-container .accepted-urls, .bootstrap-override .main_content .inner .edit-page-container .accepted-urls {
+      color: #4c4c4c;
+      list-style: none;
+      position: relative;
+      padding: 0;
+      margin: 0;
+      margin-bottom: 20px;
+      top: 10px;
+      font-size: .8em; }
+  @media screen and (max-width: 629px) {
+    .bootstrap-override .main_content .inner {
+      position: relative;
+      left: -2%; } }
+  .bootstrap-override .main_content .table {
+    color: #4c4c4c; }
+    .bootstrap-override .main_content .table th {
+      text-align: center; }
+    .bootstrap-override .main_content .table td {
+      vertical-align: middle; }
+      .bootstrap-override .main_content .table td a {
+        position: relative; }
+  .bootstrap-override .main_content .popular-time-selection {
+    width: 445px;
+    position: relative;
+    margin: 0 auto;
+    display: block;
+    min-height: 35px; }
+    .bootstrap-override .main_content .popular-time-selection .btn-primary {
+      background-color: #3498db;
+      border-color: #2C2B2B; }
+    @media screen and (max-width: 629px) {
+      .bootstrap-override .main_content .popular-time-selection {
+        width: 80%;
+        left: 10%;
+        margin: 0; } }
+  .bootstrap-override .main_content .popular-playlist-display {
+    width: 600px;
+    height: 700px;
+    margin: 0 auto;
+    position: relative;
+    background: white;
+    -webkit-box-shadow: 0 0 5px #000;
+            box-shadow: 0 0 5px #000;
+    overflow-y: auto;
+    overflow-x: hidden;
+    top: 15px; }
+    @media screen and (max-width: 650px) {
+      .bootstrap-override .main_content .popular-playlist-display {
+        width: 95%;
+        left: 2.5%; } }
+    .bootstrap-override .main_content .popular-playlist-display h1, .bootstrap-override .main_content .popular-playlist-display h2, .bootstrap-override .main_content .popular-playlist-display h3, .bootstrap-override .main_content .popular-playlist-display h4, .bootstrap-override .main_content .popular-playlist-display h5, .bootstrap-override .main_content .popular-playlist-display h6 {
+      color: black; }
+    .bootstrap-override .main_content .popular-playlist-display .popular-card {
+      width: 100%;
+      min-height: 100px;
+      height: auto;
+      border-top: 1px solid rgba(46, 46, 46, 0.4);
+      display: inline-block;
+      padding-left: 15px; }
+      @media screen and (max-width: 650px) {
+        .bootstrap-override .main_content .popular-playlist-display .popular-card {
+          width: 95%;
+          left: 2.5%; } }
+    @media screen and (max-width: 629px) {
+      .bootstrap-override .main_content .popular-playlist-display {
+        width: 98%;
+        margin: 0; } }
+  .bootstrap-override .main_content .editPageButtons {
+    margin-top: -15px; }
+  .bootstrap-override .main_content .submitButton {
+    margin-left: 15px; }
+  .bootstrap-override .main_content .videosInPlaylists {
+    background: rgba(255, 255, 255, 0.3) !important; }
+  .bootstrap-override .main_content .video-card {
+    border-bottom: 1px solid rgba(46, 46, 46, 0.6);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    max-height: 175px; }
+    .bootstrap-override .main_content .video-card .video-card-interactions {
+      margin-top: 2px; }
+    .bootstrap-override .main_content .video-card section {
+      width: 33%;
+      padding-left: 5px;
+      display: inline-block;
+      vertical-align: top; }
+      .bootstrap-override .main_content .video-card section ul {
+        list-style: none;
+        padding: 0;
+        margin: 0; }
+        .bootstrap-override .main_content .video-card section ul li {
+          width: 100%; }
+  .bootstrap-override .main_content .video-switch-button {
+    position: absolute;
+    -webkit-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+    opacity: 1;
+    padding: 15px;
+    float: left;
+    top: -35px; }
+    .bootstrap-override .main_content .video-switch-button:hover {
+      opacity: 1 !important; }
+  .bootstrap-override .main_content .next-video-box {
+    right: 0;
+    float: right; }
+  .bootstrap-override .main_content .view-playlist-box:hover .video-switch-button {
+    opacity: 1 !important; }
+
+.bootstrap-override .login-container {
+  max-width: 555px; }
+
+.bootstrap-override .video-container {
+  border: 1px solid black;
+  width: 90%;
+  position: relative;
+  left: 5%;
+  height: 95vh;
+  background: black; }
+
+#player, iframe {
+  height: 100%;
+  background: black !important; }
+
+iframe {
+  width: 100% !important;
+  height: 100% !important; }
+
+.API-Window {
+  min-height: 90vh;
+  height: 100%; }
+
+.rt-tr div {
+  width: 300px !important; }
+  @media screen and (min-width: 640px) {
+    .rt-tr div:nth-child(even) {
+      width: 100px !important; } }
+
+.Loader {
+  border: 16px solid #f3f3f3;
+  /* Light grey */
+  border-top: 16px solid #3498db;
+  /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+  margin-top: 25px;
+  margin-left: calc(50% - 120px); }
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+/*# sourceMappingURL=style.css.map*/

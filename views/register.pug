@@ -1,0 +1,22 @@
+extends layout
+
+block content
+	.inner
+		.login-page-container 
+			h2 Register
+			.login-form
+				form.form(action="/register" method="POST")
+					.form-group
+						label(for="name") Name
+						input(type="text" name="name" class="form-control")
+					.form-group
+						label(for="email") Email
+						input(type="email" name="email" class="form-control" )
+					.form-group
+						label(for="password") Password
+						input(type="password" name="password" class="form-control")
+					.form-group
+						label(for="password-confirm") Password Confirmation
+						input(type="password" name="password-confirm"  class="form-control")
+					.form-group
+						input.button(type="submit" value="Register" class="btn btn-primary")

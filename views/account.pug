@@ -1,0 +1,31 @@
+extends layout
+
+block content
+	.inner
+		.login-page-container 
+			h2 Edit Your Account
+			.login-form
+				form(action="/account" method="POST")
+					.form-group
+						label(for="name") Name
+						input(type="text" name="name" value=user.name class="form-control")
+					.form-group
+						label(for="email") Email Address
+						input(type="email" name="email" value=user.email class="form-control")
+					.form-group
+						input.button(type="submit" value="Update My Account" class="btn btn-primary")
+
+			h2 Change Your Password
+			.login-form
+				form.form(action="/updatePassword" method="POST" remote=true)
+					.form-group
+						label(for="current-password") Current Password
+						input(type="password" name="current-password" class="form-control")
+					.form-group
+						label(for="password") New Password
+						input(type="password" name="password" class="form-control")
+					.form-group
+						label(for="password-confirm") Confirm Password
+						input(type="password" name="password-confirm" class="form-control")
+					.form-group
+						input.button(type="submit" value="Update My Password" class="btn btn-primary")

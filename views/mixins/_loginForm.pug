@@ -1,0 +1,12 @@
+mixin loginForm() 
+	form.form(action="/login" method="POST")
+		.form-group
+			label(for="email") Email
+			<br />
+			input(type="email" name="email" class="form-control")
+		.form-group
+			label(for="password") Password
+			<br />
+			input(type="password" name="password" class="form-control")
+		.form-group
+			input.button(type="submit" value="Log In" class="btn btn-primary")

@@ -1,0 +1,16 @@
+extends layout
+
+include mixins/_loginForm
+include mixins/_forgot
+
+block content
+	.inner
+		.login-page-container 
+			h1= title
+			.login-form
+				+loginForm()
+				a(href="/register") Register Here
+			<br />
+			h1 I Forgot My Password!
+			.login-form
+				+forgotForm()

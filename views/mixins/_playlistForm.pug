@@ -1,0 +1,36 @@
+mixin playlistForm(playlist = {})
+	form(action="/addPlayList" method="POST", class="card")
+		.form-group
+			label(for="name") Name
+			input(type="text" name="name" value=playlist.name class="form-control")
+		.form-group
+			label(for="description") Description
+			input(type="text" name="description" value=playlist.description class="form-control")
+		.form-group
+			label(for="private") Should this playlist be private?
+			<br />
+			p(style="display:inline-block; padding-right: 10px;" class="private-text-area") #{ playlist.private || 'False' }
+			input(type="checkbox", name="private" checked=playlist.private style="display:inline-block;" class="pivate-check-box") 
+			<br />
+			.password-field(style="display: none; position: relative; margin-top: -10px;")
+				<br />
+				label(for="password") Please Enter A Password
+				input(type="text" name="password" value=playlist.password class="form-control")
+		.form-group
+			label(for="sharedEdit") Do you want to add a password so multiple people can edit this playlist?
+			<br />
+			p(style="display:inline-block; padding-right: 10px;" class="private-text-area") #{ playlist.sharedEdit || 'False' }
+			input(type="checkbox", name="sharedEdit" checked=playlist.sharedEdit style="display:inline-block;" class="pivate-check-box") 
+			<br />
+			.password-field(style="display: none; position: relative; margin-top: -10px;")
+				<br />
+				label(for="editPassword") Please Enter A Password
+				input(type="text" name="editPassword" value=playlist.editPassword class="form-control")
+		.form-group
+			label(for="tags") Tags
+			textarea(rows="2" type="text" value=playlist.tags name="tags" class="form-control")
+			p Please separate each tag with a comma
+		.form-group
+			input(type="submit" value="Save" class="btn btn-primary")
+
+
