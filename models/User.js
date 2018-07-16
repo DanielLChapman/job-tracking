@@ -25,7 +25,13 @@ const userSchema = new Schema({
 		unique: true
 	}],
 	resetPasswordToken: String,
-	resetPasswordExpires: Date
+	resetPasswordExpires: Date,
+	jobs: [
+		{
+			type: mongoose.Schema.Types.ObjectId, 
+			ref: 'Job'
+		}
+	]
 });
 
 userSchema.index({
