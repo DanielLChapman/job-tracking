@@ -266,6 +266,8 @@ describe('API Routes, no authentication', () => {
 	it('it should not get user by id without authentication', (done) => {
 		chai.request(app)
 		    .get('/api/users/0')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .end((err, res) => {
 		       	res.should.have.status(403);
 		    	done();
@@ -274,14 +276,18 @@ describe('API Routes, no authentication', () => {
 	it('it should not index users and fail without authentication', (done) => {
 		chai.request(app)
 		    .get('/api/users/')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .end((err, res) => {
 		       	res.should.have.status(403);
 		    	done();
 	    });
 	});
-	it('it should not POST user create without authentication', (done) => {
+	it('it should not POST user create without credentials', (done) => {
 		chai.request(app)
 		    .post('/api/users/')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .end((err, res) => {
 		       	res.should.have.status(403);
 		    	done();
@@ -290,6 +296,8 @@ describe('API Routes, no authentication', () => {
 	it('it should not patch update users without authentication', (done) => {
 		chai.request(app)
 		    .patch('/api/users/0')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .end((err, res) => {
 		       	res.should.have.status(403);
 		    	done();
@@ -298,6 +306,8 @@ describe('API Routes, no authentication', () => {
 	it('it should not put update users without authentication', (done) => {
 		chai.request(app)
 		    .put('/api/users/0')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .end((err, res) => {
 		       	res.should.have.status(403);
 		    	done();
@@ -306,6 +316,8 @@ describe('API Routes, no authentication', () => {
 	it('it should not delete destroy users without authentication', (done) => {
 		chai.request(app)
 		    .delete('/api/users/0')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .end((err, res) => {
 		       	res.should.have.status(403);
 		    	done();
@@ -316,6 +328,8 @@ describe('API Routes, no authentication', () => {
 	it('it should not get job by id without authentication', (done) => {
 		chai.request(app)
 		    .get('/api/jobs/0')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .end((err, res) => {
 		       	res.should.have.status(403);
 		    	done();
@@ -324,6 +338,8 @@ describe('API Routes, no authentication', () => {
 	it('it should not index jobs and fail without authentication', (done) => {
 		chai.request(app)
 		    .get('/api/jobs/')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .end((err, res) => {
 		       	res.should.have.status(403);
 		    	done();
@@ -332,6 +348,8 @@ describe('API Routes, no authentication', () => {
 	it('it should not POST job create without authentication', (done) => {
 		chai.request(app)
 		    .post('/api/jobs/')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .end((err, res) => {
 		       	res.should.have.status(403);
 		    	done();
@@ -340,6 +358,8 @@ describe('API Routes, no authentication', () => {
 	it('it should not patch job update without authentication', (done) => {
 		chai.request(app)
 		    .patch('/api/jobs/0')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .end((err, res) => {
 		       	res.should.have.status(403);
 		    	done();
@@ -348,6 +368,8 @@ describe('API Routes, no authentication', () => {
 	it('it should not put job update without authentication', (done) => {
 		chai.request(app)
 		    .put('/api/jobs/0')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .end((err, res) => {
 		       	res.should.have.status(403);
 		    	done();
@@ -356,6 +378,8 @@ describe('API Routes, no authentication', () => {
 	it('it should not delete destroy job without authentication', (done) => {
 		chai.request(app)
 		    .delete('/api/jobs/0')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .end((err, res) => {
 		       	res.should.have.status(403);
 		    	done();
@@ -381,6 +405,8 @@ describe('API Routes, authentication but invalid data', () => {
 		chai.request.agent(app)
 			.post('/api/jobs')
 			.set('Cookie', cookie)
+			.set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 			.send('jobCredentials')
 			.end(function(err, res) {
 				res.should.have.status(201);
@@ -393,6 +419,8 @@ describe('API Routes, authentication but invalid data', () => {
 		chai.request.agent(app)
 			.post('/register')
 			.send(userRegisterCredentials2)
+			.set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 			.end(function(err, res) {
 				cookie2 = res.request.cookies;
 				res.should.have.status(200);
@@ -406,6 +434,8 @@ describe('API Routes, authentication but invalid data', () => {
 		chai.request.agent(app)
 			.post('/api/jobs')
 			.set('Cookie', cookie2)
+			.set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 			.send('jobCredentials')
 			.end(function(err, res) {
 				res.should.have.status(201);
@@ -430,6 +460,8 @@ describe('API Routes, authentication but invalid data', () => {
 		chai.request(app)
 		    .get('/api/users/0')
 		    .set('Cookie', cookie)
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .end((err, res) => {
 		    	console.log('cookie vs apiKey');
 		       	res.should.have.status(200);
@@ -440,6 +472,8 @@ describe('API Routes, authentication but invalid data', () => {
 	it('it should not index users', (done) => {
 		chai.request(app)
 		    .get('/api/users/')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .set('Cookie', cookie)
 		    .end((err, res) => {
 		    	//only allow for admins
@@ -453,6 +487,8 @@ describe('API Routes, authentication but invalid data', () => {
 		chai.request(app)
 		    .post('/api/users/')
 		    .set('Cookie', cookie)
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .end((err, res) => {
 		       	res.should.have.status(422);
 		    	done();
@@ -461,6 +497,8 @@ describe('API Routes, authentication but invalid data', () => {
 	it('it should not patch update users with invalid data', (done) => {
 		chai.request(app)
 		    .patch('/api/users/0')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .set('Cookie', cookie)
 		    .end((err, res) => {
 		       	res.should.have.status(422);
@@ -470,6 +508,8 @@ describe('API Routes, authentication but invalid data', () => {
 	it('it should not patch update different user', (done) => {
 		chai.request(app)
 		    .patch('/api/users/1')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .set('Cookie', cookie)
 		    .end((err, res) => {
 		       	res.should.have.status(403);
@@ -480,6 +520,8 @@ describe('API Routes, authentication but invalid data', () => {
 	it('it should not put update users without authentication', (done) => {
 		chai.request(app)
 		    .put('/api/users/0')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .set('Cookie', cookie)
 		    .end((err, res) => {
 		       	res.should.have.status(422);
@@ -489,6 +531,8 @@ describe('API Routes, authentication but invalid data', () => {
 	it('it should not put update different user', (done) => {
 		chai.request(app)
 		    .put('/api/users/1')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .set('Cookie', cookie)
 		    .end((err, res) => {
 		       	res.should.have.status(403);
@@ -499,6 +543,8 @@ describe('API Routes, authentication but invalid data', () => {
 	it('it should not delete destroy other users', (done) => {
 		chai.request(app)
 		    .delete('/api/users/1')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .set('Cookie', cookie)
 		    .end((err, res) => {
 		       	res.should.have.status(403);
@@ -510,6 +556,8 @@ describe('API Routes, authentication but invalid data', () => {
 		chai.request(app)
 		    .get('/api/jobs/0')
 		    .set('Cookie', cookie)
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .end((err, res) => {
 		       	res.should.have.status(200);
 		    	done();
@@ -520,6 +568,8 @@ describe('API Routes, authentication but invalid data', () => {
 		chai.request(app)
 		    .get('/api/jobs/1')
 		    .set('Cookie', cookie)
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .end((err, res) => {
 		    	//cant delete someone else's
 		       	res.should.have.status(401);
@@ -530,6 +580,8 @@ describe('API Routes, authentication but invalid data', () => {
 	it('it should index jobs ', (done) => {
 		chai.request(app)
 		    .get('/api/jobs/')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .set('Cookie', cookie)
 		    .end((err, res) => {
 		       	res.should.have.status(200);
@@ -539,6 +591,8 @@ describe('API Routes, authentication but invalid data', () => {
 	it('it should not POST job create with invalid data', (done) => {
 		chai.request(app)
 		    .post('/api/jobs/')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .set('Cookie', cookie)
 		    .end((err, res) => {
 		       	res.should.have.status(422);
@@ -548,6 +602,8 @@ describe('API Routes, authentication but invalid data', () => {
 	it('it should not patch job update with invalid data or no data', (done) => {
 		chai.request(app)
 		    .patch('/api/jobs/0')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .set('Cookie', cookie)
 		    .end((err, res) => {
 		       	res.should.have.status(422);
@@ -557,6 +613,8 @@ describe('API Routes, authentication but invalid data', () => {
 	it('it should not put job update with invalid or no data', (done) => {
 		chai.request(app)
 		    .put('/api/jobs/0')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .set('Cookie', cookie)
 		    .end((err, res) => {
 		       	res.should.have.status(422);
@@ -567,6 +625,8 @@ describe('API Routes, authentication but invalid data', () => {
 		chai.request(app)
 		    .put('/api/jobs/1')
 		    .set('Cookie', cookie)
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .end((err, res) => {
 		       	res.should.have.status(403);
 		    	done();
@@ -576,6 +636,8 @@ describe('API Routes, authentication but invalid data', () => {
 	it('it should delete destroy job', (done) => {
 		chai.request(app)
 		    .delete('/api/jobs/0')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .set('Cookie', cookie)
 		    .end((err, res) => {
 		       	res.should.have.status(204);
@@ -585,6 +647,8 @@ describe('API Routes, authentication but invalid data', () => {
 	it('it should delete destroy someone elses job', (done) => {
 		chai.request(app)
 		    .delete('/api/jobs/1')
+		    .set('Content-Type', 'application/json')
+        	.set('Accept', 'application/json')
 		    .set('Cookie', cookie)
 		    .end((err, res) => {
 		       	res.should.have.status(403);

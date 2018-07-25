@@ -15,6 +15,7 @@
   },
   "browserslist": "last 2 versions",
   "dependencies": {
+    "atob": "^2.1.1",
     "axios": "0.17.0",
     "body-parser": "1.18.2",
     "connect-flash": "0.1.1",

@@ -7,7 +7,11 @@ function hashPass(pass, salt) {
 	return crypto.pbkdf2Sync(pass, salt, 10000, 256, 'sha').toString('hex');
 }
 
-exports.homePage = async (req, res) => {
+exports.homePage = (req, res) => {
 	res.render('index', {title: 'Index'});
+}
+
+exports.returnHere = (req, res) => {
+	res.json('Here');
 }
 

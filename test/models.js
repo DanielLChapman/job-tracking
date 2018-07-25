@@ -24,6 +24,13 @@ let userRegisterCredentials = {
   passwordConfirm: 'foobar'
 };
 
+const userRegisterCredentials2 = {
+  name: 'Test2',
+  email: 'example2@foo.bar', 
+  password: 'foobar',
+  passwordConfirm: 'foobar'
+}
+
 let jobCredentials = {
   position: 'Text',
   company: 'text'
@@ -44,6 +51,18 @@ describe('Testing User Model Validation', () => {
             done();
           });
       });
+
+    it('should not register with the same email', (done) => {
+      chai.request.agent(app)
+        .post('/register')
+        .send(userRegisterCredentials)
+        .end(function(err, res) {
+          res.should.have.status(422);
+          res.req.path.should.equal('/register');
+          res.request.cookies.should.be.empty;
+          done();
+        });
+    });
 
     it('should not register with an invalid name', (done) => {
       delete userRegisterCredentials.name;
@@ -164,6 +183,8 @@ describe('Testing User Model Validation', () => {
         .post('/api/jobs/')
         .set('Cookie', cookie)
         .send(jobCredentials)
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
         .end(function(err, res) {
           res.should.have.status(200);
           var tempJSON = JSON.parse(res.text)[0];
@@ -204,6 +225,8 @@ describe('Testing Job Model Validation', () => {
       chai.request.agent(app)
         .post('/api/jobs/')
         .set('Cookie', cookie)
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
         .send(jobCredentials)
         .end(function(err, res) {
           var tempJSON = JSON.parse(res.text)[0];
@@ -221,6 +244,8 @@ describe('Testing Job Model Validation', () => {
         .post('/api/jobs/')
         .set('Cookie', cookie)
         .send(jobCredentials)
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
         .end(function(err, res) {
           var tempJSON = JSON.parse(res.text)[0];
           console.log(tempJSON);
@@ -234,6 +259,8 @@ describe('Testing Job Model Validation', () => {
       jobCredentials.company = "Text";
       chai.request.agent(app)
         .post('/api/jobs/')
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
         .set('Cookie', cookie)
         .send(jobCredentials)
         .end(function(err, res) {

@@ -25303,6 +25303,13 @@ var JOBSApp = function (_Component) {
 	}
 
 	_createClass(JOBSApp, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			_axios2.default.get('/api/jobs', {
+				headers: { authorization: 'ttt' }
+			});
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(

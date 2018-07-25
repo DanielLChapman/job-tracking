@@ -23,6 +23,13 @@ const userRegisterCredentials = {
   passwordConfirm: 'foobar'
 }
 
+const userRegisterCredentials2 = {
+  name: 'Test2',
+  email: 'example2@foo.bar', 
+  password: 'foobar',
+  passwordConfirm: 'foobar'
+}
+
 const userLoginCredentials = {
   email: 'example@foo.bar', 
   password: 'foobar'
@@ -36,6 +43,8 @@ const jobCredentials = {
 
 describe('User Controller', () => {
   before(function(done){
+    User.remove({}, (err) => {         
+    });  
     chai.request.agent(app)
       .post('/register')
       .send(userRegisterCredentials)
@@ -55,7 +64,7 @@ describe('User Controller', () => {
   });
 
   it('it should expect the number of users to increase', (done) => {
-    User.count({}, function( err, count){
+    User.countDocuments({}, function( err, count){
         chai.assert(count == 1);
         done();
     });
@@ -131,6 +140,8 @@ describe('User Controller', () => {
     it('should create 2 jobs', (done) => {
       chai.request.agent(app)
         .post('/api/jobs/')
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
         .set('Cookie', cookie)
         .send(jobCredentials)
         .end((err, res) => {
@@ -140,6 +151,8 @@ describe('User Controller', () => {
       chai.request.agent(app)
         .post('/api/jobs/')
         .set('Cookie', cookie)
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
         .send(jobCredentials)
         .end((err, res) => {
           res.should.have.status(201);
@@ -148,12 +161,14 @@ describe('User Controller', () => {
         });
     })
 
-    it('should have 2 playlists', (done) => {
+    it('should have 2 jobs', (done) => {
       chai.request(app)
         .get('/api/jobs/')
         .set('Cookie', cookie)
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
         .end((err, res) => {
-          Job.count({}, function( err, count){
+          Job.countDocuments({}, function( err, count){
               chai.assert(count == 2);
           });
           done();
@@ -164,9 +179,11 @@ describe('User Controller', () => {
       chai.request.agent(app)
         .delete('/api/users/0')
         .set('Cookie', cookie)
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
         .end((err, res) => {
           res.req.path.should.equal('/');
-          User.count({}, function( err, count){
+          User.countDocuments({}, function( err, count){
               chai.assert(count == 0);
           });
           done();
@@ -174,7 +191,7 @@ describe('User Controller', () => {
     });
 
     it('Dependent Destroy', (done) => {
-      Job.count({}, function( err, count){
+      Job.countDocuments({}, function( err, count){
           chai.assert(count == 0);
       });
       done();
@@ -199,7 +216,7 @@ describe('Job Controller', () => {
 
     chai.request.agent(app)
       .post('/register')
-      .send(userRegisterCredentials)
+      .send(userRegisterCredentials2)
       .end(async function(err, res) {
         cookie2 = res.request.cookies;
         res.should.have.status(200);
@@ -221,6 +238,8 @@ describe('Job Controller', () => {
     chai.request.agent(app)
       .post('/api/jobs/')
       .set('Cookie', cookie)
+      .set('Content-Type', 'application/json')
+      .set('Accept', 'application/json')
       .send(jobCredentials)
       .end((err, res) => {
         res.should.have.status(201);
@@ -232,6 +251,8 @@ describe('Job Controller', () => {
     chai.request.agent(app)
       .post('/api/jobs/')
       .set('Cookie', cookie2)
+      .set('Content-Type', 'application/json')
+      .set('Accept', 'application/json')
       .send(jobCredentials)
       .end((err, res) => {
         res.should.have.status(201);
@@ -240,7 +261,7 @@ describe('Job Controller', () => {
   });
 
   it('it should expect the number of job to increase', (done) => {
-    Job.count({}, function( err, count){
+    Job.countDocuments({}, function( err, count){
         chai.assert(count == 2);
       done();
     });
@@ -249,6 +270,8 @@ describe('Job Controller', () => {
   it('it should get the index of jobs but fail for no authorization', (done) => {
     chai.request(app)
       .get(`/api/jobs`)
+      .set('Content-Type', 'application/json')
+      .set('Accept', 'application/json')
       .end((err, res) => {
         res.should.have.status(401);
         done();
@@ -260,6 +283,8 @@ describe('Job Controller', () => {
     chai.request(app)
       .get(`/api/jobs`)
       .set('Cookie', cookie)
+      .set('Content-Type', 'application/json')
+      .set('Accept', 'application/json')
       .end((err, res) => {
         jobData = JSON.parse(res.text);
         jobData.length.should.equal(1);
@@ -271,6 +296,8 @@ describe('Job Controller', () => {
     chai.request(app)
       .get(`/api/jobs/0`)
       .set('Cookie', cookie)
+      .set('Content-Type', 'application/json')
+      .set('Accept', 'application/json')
       .end((err, res) => {
         jobData = JSON.parse(res.text);
         chai.assert(jobData.position === "Text");
@@ -281,6 +308,8 @@ describe('Job Controller', () => {
   it('it should fail to get information about a single job for not being the owner', (done) => {
     chai.request(app)
       .get(`/api/jobs/0`)
+      .set('Content-Type', 'application/json')
+      .set('Accept', 'application/json')
       .set('Cookie', cookie2)
       .end((err, res) => {
         res.should.have.status(401);
@@ -292,6 +321,8 @@ describe('Job Controller', () => {
     chai.request(app)
       .put(`/api/jobs/0`)
       .set('Cookie', cookie)
+      .set('Content-Type', 'application/json')
+      .set('Accept', 'application/json')
       .send({
         changes: {
           position: 'Text2'
@@ -307,6 +338,8 @@ describe('Job Controller', () => {
     chai.request(app)
       .patch(`/api/jobs/0`)
       .set('Cookie', cookie)
+      .set('Content-Type', 'application/json')
+      .set('Accept', 'application/json')
       .send({
         changes: {
           position: 'Text3'
@@ -322,6 +355,8 @@ describe('Job Controller', () => {
     chai.request(app)
       .patch(`/api/jobs/0`)
       .set('Cookie', cookie2)
+      .set('Content-Type', 'application/json')
+      .set('Accept', 'application/json')
       .send({
         changes: {
           position: 'Text3'
@@ -336,9 +371,11 @@ describe('Job Controller', () => {
   it('should not delete the job', (done) => {
       chai.request.agent(app)
         .delete('/api/jobs/1')
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
         .set('Cookie', cookie)
         .end((err, res) => {
-          Job.count({}, function( err, count){
+          Job.countDocuments({}, function( err, count){
               chai.assert(count == 2);
           });
           done();
@@ -348,9 +385,11 @@ describe('Job Controller', () => {
   it('should delete the job', (done) => {
       chai.request.agent(app)
         .delete('/api/jobs/0')
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
         .set('Cookie', cookie)
         .end((err, res) => {
-          Job.count({}, function( err, count){
+          Job.countDocuments({}, function( err, count){
               chai.assert(count == 1);
           });
           done();

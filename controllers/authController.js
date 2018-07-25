@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const promisify = require('es6-promisify');
 const axios = require('axios');
+const atob = require('atob');
 
 exports.login = passport.authenticate('local', {
 	failureRedirect: '/login',
@@ -27,6 +28,26 @@ exports.isLoggedIn = (req, res, next) => {
 	}
 }
 
+exports.apiIsLoggedIn = (req, res, next) => {
+	if (req.isAuthenticated()) {
+		next();
+	} else if (req.headers.authorization) {
+		let tempHeaders = req.headers.authorization;
+		let splitHeaders = tempHeaders.split(' ');
+		if (splitHeaders.length == 2 && splitHeaders[0] === 'Basic') {
+			//let converted = window.atob(splitHeaders[1].toString());
+			console.log(atob(splitHeaders[1].toString()));
+		} else {
+			console.log(tempHeaders);
+		}
+
+
+	}
+	else {
+		res.json(res);
+	}
+}
+
 exports.forgot = async(req, res) => {
 	//user exists
 	const user = await User.findOne({email: req.body.email});
@@ -44,9 +65,9 @@ exports.forgot = async(req, res) => {
 	axios.post(url, "", { params: {
 		from: `noreply@${process.env.MAILGUN_DOMAIN}`,
 		to: user.email,
-		subject: "PL-A Forgot Password",
+		subject: "Job Tracking Forgot Password",
 		text: `Reset Password at this url: ${resetURL}`,
-		html: `<h4>Click <a href="${resetURL}">here </a> to reset your password for PL-A</h4>. <br />
+		html: `<h4>Click <a href="${resetURL}">here </a> to reset your password for Job Tracking</h4>. <br />
 		<h4>Ignore this email if you didnt request this.</h4> <br />
 		<h4>If the link doesnt work, copy and paste this into your url: ${resetURL}</h4>`
 	}}

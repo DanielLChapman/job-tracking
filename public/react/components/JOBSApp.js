@@ -16,6 +16,12 @@ class JOBSApp extends Component {
 
 	}
 
+	componentDidMount() {
+		axios.get('/api/jobs', {
+			headers: {authorization: 'ttt'}
+		}
+		);
+	}
 
 	render () {
 		return (
