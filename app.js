@@ -13,6 +13,7 @@ const flash = require('connect-flash');
 const expressValidator = require('express-validator');
 const routes = require('./routes/index');
 const apiRoutes = require('./routes/api');
+var cors = require('cors');
 const helpers = require('./helpers');
 const errorHandlers = require('./handlers/errorHandlers');
 require('./handlers/passport');
@@ -93,6 +94,21 @@ if (app.get('env') === 'development') {
 
 // production error handler
 app.use(errorHandlers.productionErrors);
+
+//cors
+app.use((req, res, next) => {  
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+  res.setHeader('Access-Control-Allow-Headers', 'Content-type, Accept, X-Access-Token, api_key, authorization');
+
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  next();
+});
+
+app.use(cors())
 
 // Make sure we are running node 7.6+
 const [major, minor] = process.versions.node.split('.').map(parseFloat);

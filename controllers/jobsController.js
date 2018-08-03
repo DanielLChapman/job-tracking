@@ -15,3 +15,18 @@ exports.returnHere = (req, res) => {
 	res.json('Here');
 }
 
+exports.validateJobData = (req, res, next) => {
+	next();
+}
+
+exports.createJob = (req, res) => {
+	res.json('Done');
+}
+
+exports.displayJobs = (req, res) => {
+	res.json('Display Jobs');
+}
+
+exports.addJob = (req, res) => {
+	res.json('Add Job');
+}

@@ -26,32 +26,57 @@ const { catchErrors } = require('../handlers/errorHandlers');
 	*/
 
 /* get*/
-router.get('/users/:user_id', jobsController.returnHere);
+router.get('/users/:user_id', 
+	authController.apiIsLoggedIn,
+	jobsController.returnHere);
 /* index */
-router.get('/users/', jobsController.returnHere);
+router.get('/users/', 
+	authController.apiIsLoggedIn,
+	jobsController.returnHere);
 /* create */
-router.post('/users', jobsController.returnHere);
+router.post('/users', 
+	authController.apiIsLoggedIn,
+	jobsController.returnHere);
 /* edit */
-router.patch('/users/:user_id', jobsController.returnHere);
+router.patch('/users/:user_id', 
+	authController.apiIsLoggedIn,
+	jobsController.returnHere);
 /* edit */
-router.put('/users/:user_id', jobsController.returnHere);
+router.put('/users/:user_id', 
+	authController.apiIsLoggedIn,
+	jobsController.returnHere);
 /* destroy */
-router.delete('/users/:user_id', jobsController.returnHere);
+router.delete('/users/:user_id', 
+	authController.apiIsLoggedIn,
+	jobsController.returnHere);
 
 /* get job */
-router.get('/jobs/:job_id', jobsController.returnHere);
+router.get('/jobs/:job_id', 
+	authController.apiIsLoggedIn,
+	jobsController.returnHere);
 /* index job */
 router.get('/jobs/',
 	authController.apiIsLoggedIn,
  	jobsController.returnHere);
 /* create job*/
-router.post('/jobs/', jobsController.returnHere);
+router.post('/jobs/', 
+	authController.apiIsLoggedIn,
+	jobsController.validateJobData,
+	jobsController.createJob);
 /* patch edit job*/
-router.patch('/jobs/:job_id', jobsController.returnHere);
+router.patch('/jobs/:job_id', 
+	authController.apiIsLoggedIn,
+	jobsController.validateJobData,
+	jobsController.returnHere);
 /* put edit job */
-router.put('/jobs/:job_id', jobsController.returnHere);
+router.put('/jobs/:job_id',
+	authController.apiIsLoggedIn,
+	jobsController.validateJobData,
+	jobsController.returnHere);
 /* destroy job */
-router.delete('/jobs/:job_id', jobsController.returnHere);
+router.delete('/jobs/:job_id', 
+	authController.apiIsLoggedIn,
+	jobsController.returnHere);
 
 
 

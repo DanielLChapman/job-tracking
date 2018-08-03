@@ -26,6 +26,33 @@ router.delete('/delete',
 	authController.isLoggedIn,
 	catchErrors(userController.deleteAccount));
 
+router.get('/forgot', 
+	jobsController.homePage
+);
+
+router.get('/jobs', 
+	authController.isLoggedIn,
+	jobsController.displayJobs);
+
+router.get('/add', 
+	authController.isLoggedIn,
+	jobsController.addJob);
+
+router.get('/api',
+	authController.isLoggedIn,
+	userController.apiDisplay);
+
+router.get('/apiKeys', 
+	authController.isLoggedIn,
+	catchErrors(userController.indexAPIKeys))
+
+router.post('/apiKeys',
+	authController.isLoggedIn,
+	catchErrors(userController.generateNewAPIKey));
+
+router.delete('/apiKeys', 
+	authController.isLoggedIn,
+	catchErrors(userController.deleteAPIKey));
 
 /*
 

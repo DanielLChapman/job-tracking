@@ -22,7 +22,8 @@ const userSchema = new Schema({
 	},
 	apiKeys: [{
 		type: String,
-		unique: true
+		unique: true,
+		sparse: true
 	}],
 	resetPasswordToken: String,
 	resetPasswordExpires: Date,

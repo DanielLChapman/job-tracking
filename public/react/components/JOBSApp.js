@@ -17,9 +17,14 @@ class JOBSApp extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('/api/jobs', {
-			headers: {authorization: 'ttt'}
-		}
+		axios.post('/api/jobs', {
+				headers: {
+					'Content-Type': 'application/json',
+          			"Access-Control-Allow-Origin": "*"
+          			
+          		},
+          		'authorization': 'hallo'
+			}
 		);
 	}
 

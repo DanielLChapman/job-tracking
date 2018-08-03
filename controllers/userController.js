@@ -32,6 +32,7 @@ exports.validateRegister = (req, res, next) => {
 	const errors = req.validationErrors();
 	if (errors) {
 		req.flash('error', errors.map(err => err.msg));
+		res.status(422);
 		res.render('register', {title: 'Register', body: req.body, flashes: req.flash() 
 		});
 		return;
@@ -42,7 +43,12 @@ exports.validateRegister = (req, res, next) => {
 exports.actualRegister = async (req, res, next) => {
 	const user = new User({ email: req.body.email, name: req.body.name});
 	const register = promisify(User.register, User);
-	await register(user, req.body.password);
+	try {
+		await register(user, req.body.password);
+	} catch(err) {
+		console.log(err);
+		return res.redirect('/register');
+	}
 	next();
 }
 
@@ -92,4 +98,45 @@ exports.deleteAccount = async(req, res) => {
 			res.redirect('/');
 		}
 	});
+}
+
+exports.apiDisplay = (req, res) => {
+	res.json('here');
+}
+
+exports.indexAPIKeys = async(req, res) => {
+	var user = await User.findOne({_id: req.user._id, apiKeys: apiKey});
+	const apiKeys = user.apiKeys;
+	return res.json({'apiKeys': apiKeys});
+}
+exports.generateNewAPIKey = async(req, res) => {
+	if (req.user.apiKeys.length < 10) {
+		const hat = require('hat');
+		const newAPIKey = hat();
+		const user = await User.findOneAndUpdate(
+			{_id: req.user._id}, 
+			{ $push: {
+				apiKeys: newAPIKey
+			}}
+		);
+		return res.json({'apiKey': newAPIKey});
+	} else {
+		return res.json({'Error': 'API Keys are limited to 10 per user, contact us if you need more'});
+	}
+}
+
+exports.deleteAPIKey = async(req, res) => {
+	const apiKey = req.body.apiKey;
+	if (typeof apiKey === 'undefined') {
+		return res.status(400).json({'Error': 'Key Not Found In Data'});
+	}
+	var user = await User.findOne({_id: req.user._id, apiKeys: apiKey});
+	user.apiKeys.pull(apiKey);
+	await user.save(function(err) {
+		if (err) {
+			return res.status(400).json(err);
+		}
+	});
+
+	res.json({'api key': apiKey, 'success': 'Successfully deleted key'});
 }

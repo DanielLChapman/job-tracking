@@ -161,6 +161,9 @@ describe('Testing User Model Validation', () => {
 
   describe('Model should have many jobs', () => {
     before(function(done){
+      User.remove({}, (err) => {         
+      });  
+
       chai.request.agent(app)
         .post('/register')
         .send(userRegisterCredentials)
@@ -200,6 +203,9 @@ describe('Testing User Model Validation', () => {
 
 describe('Testing Job Model Validation', () => {
   before(function(done){
+    User.remove({}, (err) => {         
+    });  
+
       chai.request.agent(app)
         .post('/register')
         .send(userRegisterCredentials)
@@ -212,8 +218,7 @@ describe('Testing Job Model Validation', () => {
         });
     });
     after(function(done){
-      User.remove({}, (err) => { 
-            done();         
+      User.remove({}, (err) => {         
           });
       Job.remove({}, (err) => { 
             done();         

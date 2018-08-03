@@ -29,22 +29,50 @@ exports.isLoggedIn = (req, res, next) => {
 }
 
 exports.apiIsLoggedIn = (req, res, next) => {
+	let authorization = req.headers.authorization;
+	if (typeof authorization === 'undefined') {
+		try {
+			authorization = req.body.data.authorization || req.body.data.api_key;
+		}
+		catch (err) {
+			try {
+				authorization = req.body.authorization || req.body.api_key;
+			}
+			catch (err) {
+				res.status(403).json('Error, not authorized');
+			}
+		}
+	}
+
 	if (req.isAuthenticated()) {
 		next();
-	} else if (req.headers.authorization) {
-		let tempHeaders = req.headers.authorization;
+	} else if (authorization) {
+		//tests send cookies so can handle api later
+		let tempHeaders = authorization;
 		let splitHeaders = tempHeaders.split(' ');
 		if (splitHeaders.length == 2 && splitHeaders[0] === 'Basic') {
-			//let converted = window.atob(splitHeaders[1].toString());
-			console.log(atob(splitHeaders[1].toString()));
+			let apiVal = atob(splitHeaders[1].toString());
+			let tempVal = apiVal.split(''); 
+
+			if (tempVal[tempVal.length - 1] === ":") {
+				apiVal = apiVal.substring(0, apiVal.length - 1);
+			} else {
+				tempVal = apiVal.split(':');
+				apiVal = tempVal[1];
+			}
+
+			console.log(apiVal);
+			next();
+
 		} else {
 			console.log(tempHeaders);
+			next();
 		}
 
 
 	}
 	else {
-		res.json(res);
+		return res.status(403).json('Err');
 	}
 }
 

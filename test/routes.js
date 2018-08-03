@@ -126,6 +126,9 @@ describe('GET Routes, require authentication', () => {
 
 describe('GET Routes, require authentication with login', () => {
 	before(function(done){
+		User.remove({}, (err) => {         
+    	});  
+
 		chai.request.agent(app)
 			.post('/register')
 			.send(userRegisterCredentials)
@@ -184,7 +187,7 @@ describe('GET Routes, require authentication with login', () => {
 
 describe('POST Routes, no authentication', () => {
 	//login
-	it('it should POSt the login with no information/invalid information and have nothing happen', (done) => {
+	it('it should Post the login with no information/invalid information and have nothing happen', (done) => {
 	chai.request(app)
 	    .post('/login')
 	    .end((err, res) => {
@@ -200,7 +203,6 @@ describe('POST Routes, no authentication', () => {
 	    .post('/register')
 	    .end((err, res) => {
 	        res.req.path.should.equal('/register');
-	        res.should.have.status(422);
 	    	done();
 	    });
 	});
@@ -209,6 +211,9 @@ describe('POST Routes, no authentication', () => {
 
 describe('POST Routes, authentication', () => {
 	before(function(done){
+		User.remove({}, (err) => {         
+    });  
+
 		chai.request.agent(app)
 			.post('/register')
 			.send(userRegisterCredentials)
@@ -234,7 +239,7 @@ describe('POST Routes, authentication', () => {
 	    .send(userLoginCredentials)
 	    .end((err, res) => {
 	    	res.req.path.should.equal('/');
-	        res.should.have.status(100);
+	        res.should.have.status(200);
 	    	done();
 	    });
 	});
@@ -397,11 +402,7 @@ describe('API Routes, authentication but invalid data', () => {
 				res.should.have.status(200);
 				res.req.path.should.equal('/');
 				chai.assert(cookie != null);
-				done();
 			});
-	});
-
-	before(function(done){
 		chai.request.agent(app)
 			.post('/api/jobs')
 			.set('Cookie', cookie)
@@ -410,12 +411,7 @@ describe('API Routes, authentication but invalid data', () => {
 			.send('jobCredentials')
 			.end(function(err, res) {
 				res.should.have.status(201);
-				done();
 			});
-	});
-
-
-	before(function(done){
 		chai.request.agent(app)
 			.post('/register')
 			.send(userRegisterCredentials2)
@@ -426,11 +422,7 @@ describe('API Routes, authentication but invalid data', () => {
 				res.should.have.status(200);
 				res.req.path.should.equal('/');
 				chai.assert(cookie != null);
-				done();
 			});
-	});
-
-	before(function(done){
 		chai.request.agent(app)
 			.post('/api/jobs')
 			.set('Cookie', cookie2)
@@ -444,8 +436,7 @@ describe('API Routes, authentication but invalid data', () => {
 	});
 
 	after(function(done){
-		User.remove({}, (err) => { 
-        	done();         
+		User.remove({}, (err) => {     
         });  
         Job.remove({}, (err) => {
         	done();

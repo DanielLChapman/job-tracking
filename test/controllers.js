@@ -45,6 +45,7 @@ describe('User Controller', () => {
   before(function(done){
     User.remove({}, (err) => {         
     });  
+
     chai.request.agent(app)
       .post('/register')
       .send(userRegisterCredentials)
@@ -52,9 +53,10 @@ describe('User Controller', () => {
         cookie = res.request.cookies;
         res.should.have.status(200);
         res.req.path.should.equal('/');
-        chai.assert(cookie != null);
+        chai.assert(cookie != null, 'cookie is null');
         done();
       });
+
   });
 
   after(function(done){
@@ -64,8 +66,9 @@ describe('User Controller', () => {
   });
 
   it('it should expect the number of users to increase', (done) => {
-    User.countDocuments({}, function( err, count){
-        chai.assert(count == 1);
+
+    User.count({}, function( err, count){
+        chai.assert(count == 1, 'wrong count');
         done();
     });
   });
@@ -97,7 +100,7 @@ describe('User Controller', () => {
       .send(userLoginCredentials)
       .end((err, res) => {
         cookie = res.request.cookies;
-        chai.assert(cookie != null);
+        chai.assert(cookie != null, 'cookie is null');
         res.req.path.should.equal('/');
         done();
       });
@@ -113,7 +116,7 @@ describe('User Controller', () => {
       .end((err, res) => {
         res.req.path.should.equal('/account');
         User.findOne({name: 'Wow'}, function(error, account) {
-          chai.assert(account == null);
+          chai.assert(account == null, 'Shouldnt have updated');
           done();
         });
       });
@@ -129,7 +132,7 @@ describe('User Controller', () => {
       .set('Cookie', cookie)
       .end((err, res) => {
         User.findOne({name: 'Wow'}, function(error, account) {
-          chai.assert(account != null);
+          chai.assert(account != null, 'Account failed to update');
           done();
         });
       });
@@ -168,8 +171,8 @@ describe('User Controller', () => {
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .end((err, res) => {
-          Job.countDocuments({}, function( err, count){
-              chai.assert(count == 2);
+          Job.count({}, function( err, count){
+              chai.assert(count == 2, 'Wrong Count');
           });
           done();
         });
@@ -183,16 +186,16 @@ describe('User Controller', () => {
         .set('Accept', 'application/json')
         .end((err, res) => {
           res.req.path.should.equal('/');
-          User.countDocuments({}, function( err, count){
-              chai.assert(count == 0);
+          User.count({}, function( err, count){
+              chai.assert(count == 0, 'Wrong Count');
           });
           done();
         });
     });
 
     it('Dependent Destroy', (done) => {
-      Job.countDocuments({}, function( err, count){
-          chai.assert(count == 0);
+      Job.count({}, function( err, count){
+          chai.assert(count == 0, 'Wrong count');
       });
       done();
     });
@@ -202,7 +205,10 @@ describe('User Controller', () => {
 });
 
 describe('Job Controller', () => {
+
   before(function(done){
+    User.remove({}, (err) => {         
+    });  
     chai.request.agent(app)
       .post('/register')
       .send(userRegisterCredentials)
@@ -210,8 +216,7 @@ describe('Job Controller', () => {
         cookie = res.request.cookies;
         res.should.have.status(200);
         res.req.path.should.equal('/');
-        chai.assert(cookie != null);
-        done();
+        chai.assert(cookie != null, 'Cookie is null');
       });
 
     chai.request.agent(app)
@@ -221,7 +226,7 @@ describe('Job Controller', () => {
         cookie2 = res.request.cookies;
         res.should.have.status(200);
         res.req.path.should.equal('/');
-        chai.assert(cookie != null);
+        chai.assert(cookie != null, 'Cookie is null');
         done();
       });
   });
@@ -261,8 +266,8 @@ describe('Job Controller', () => {
   });
 
   it('it should expect the number of job to increase', (done) => {
-    Job.countDocuments({}, function( err, count){
-        chai.assert(count == 2);
+    Job.count({}, function( err, count){
+        chai.assert(count == 2, 'Wrong Count');
       done();
     });
   });
@@ -300,7 +305,7 @@ describe('Job Controller', () => {
       .set('Accept', 'application/json')
       .end((err, res) => {
         jobData = JSON.parse(res.text);
-        chai.assert(jobData.position === "Text");
+        chai.assert(jobData.position === "Text", 'Invalid text');
         done();
       })
   });
@@ -330,7 +335,7 @@ describe('Job Controller', () => {
       })
       .end((err, res) => {
         jobData = JSON.parse(res.text);
-        chai.assert(jobData.position === "Text2");
+        chai.assert(jobData.position === "Text2", 'Failed to update');
         done();
       })
   });
@@ -347,7 +352,7 @@ describe('Job Controller', () => {
       })
       .end((err, res) => {
         jobData = JSON.parse(res.text);
-        chai.assert(jobData.position === "Text3");
+        chai.assert(jobData.position === "Text3", 'Failed to update');
         done();
       })
   });
@@ -375,8 +380,8 @@ describe('Job Controller', () => {
         .set('Accept', 'application/json')
         .set('Cookie', cookie)
         .end((err, res) => {
-          Job.countDocuments({}, function( err, count){
-              chai.assert(count == 2);
+          Job.count({}, function( err, count){
+              chai.assert(count == 2, 'Wrong count');
           });
           done();
         });
@@ -389,8 +394,8 @@ describe('Job Controller', () => {
         .set('Accept', 'application/json')
         .set('Cookie', cookie)
         .end((err, res) => {
-          Job.countDocuments({}, function( err, count){
-              chai.assert(count == 1);
+          Job.count({}, function( err, count){
+              chai.assert(count == 1, 'Wrong count');
           });
           done();
         });
