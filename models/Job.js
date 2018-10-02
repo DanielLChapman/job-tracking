@@ -5,7 +5,7 @@ const crypto = require('crypto');
 
 
 const jobSchema = new mongoose.Schema({
-	positon: {
+	position: {
 		type: String,
 		trim: true,
 		required: 'Please enter a position'

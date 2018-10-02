@@ -46,7 +46,8 @@ exports.actualRegister = async (req, res, next) => {
 	try {
 		await register(user, req.body.password);
 	} catch(err) {
-		console.log(err);
+		req.flash('error', 'Please try again, something may have gone wrong on our end.');
+		res.status(422);
 		return res.redirect('/register');
 	}
 	next();
@@ -84,7 +85,7 @@ exports.deleteAccount = async(req, res) => {
 	req.logout();
 	User.remove({ _id: user._id}, function(err) {
 		if (!err) {
-			Playlist.remove({user: user._id}, function(err) {
+			Job.remove({oid: user._id}, function(err) {
 				if (!err) {
 					console.log('deleted user: ' + user.name)
 				} else {

@@ -53,11 +53,11 @@ router.delete('/users/:user_id',
 /* get job */
 router.get('/jobs/:job_id', 
 	authController.apiIsLoggedIn,
-	jobsController.returnHere);
+	jobsController.getJob);
 /* index job */
 router.get('/jobs/',
 	authController.apiIsLoggedIn,
- 	jobsController.returnHere);
+ 	jobsController.indexJobs);
 /* create job*/
 router.post('/jobs/', 
 	authController.apiIsLoggedIn,
@@ -67,16 +67,16 @@ router.post('/jobs/',
 router.patch('/jobs/:job_id', 
 	authController.apiIsLoggedIn,
 	jobsController.validateJobData,
-	jobsController.returnHere);
+	jobsController.editJob);
 /* put edit job */
 router.put('/jobs/:job_id',
 	authController.apiIsLoggedIn,
 	jobsController.validateJobData,
-	jobsController.returnHere);
+	jobsController.editJob);
 /* destroy job */
 router.delete('/jobs/:job_id', 
 	authController.apiIsLoggedIn,
-	jobsController.returnHere);
+	jobsController.deleteJob);
 
 
 

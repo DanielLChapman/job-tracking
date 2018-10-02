@@ -28,7 +28,7 @@ exports.isLoggedIn = (req, res, next) => {
 	}
 }
 
-exports.apiIsLoggedIn = (req, res, next) => {
+exports.apiIsLoggedIn = async(req, res, next) => {
 	let authorization = req.headers.authorization;
 	if (typeof authorization === 'undefined') {
 		try {
@@ -50,6 +50,7 @@ exports.apiIsLoggedIn = (req, res, next) => {
 		//tests send cookies so can handle api later
 		let tempHeaders = authorization;
 		let splitHeaders = tempHeaders.split(' ');
+		let apiKey;
 		if (splitHeaders.length == 2 && splitHeaders[0] === 'Basic') {
 			let apiVal = atob(splitHeaders[1].toString());
 			let tempVal = apiVal.split(''); 
@@ -60,16 +61,28 @@ exports.apiIsLoggedIn = (req, res, next) => {
 				tempVal = apiVal.split(':');
 				apiVal = tempVal[1];
 			}
-
+			console.log('apiVal: ');
 			console.log(apiVal);
-			next();
+			apiKey = apiVal;
 
 		} else {
-			console.log(tempHeaders);
-			next();
+			// console.log('Temp Headers: ');
+			// console.log(tempHeaders);
+			apiKey = tempHeaders;
 		}
 
-
+		let user;
+		if (req.user == null) {
+			user = await User.findOne({
+				$text: {
+					$search: apiKey
+				}
+			});
+		} else {
+			user = req.user;
+		}
+		res.user = user;
+		next();
 	}
 	else {
 		return res.status(403).json('Err');

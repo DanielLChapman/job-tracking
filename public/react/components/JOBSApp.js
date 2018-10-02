@@ -20,10 +20,12 @@ class JOBSApp extends Component {
 		axios.post('/api/jobs', {
 				headers: {
 					'Content-Type': 'application/json',
-          			"Access-Control-Allow-Origin": "*"
-          			
+          			"Access-Control-Allow-Origin": "*",
+          			'authorization': '1056bbb45076557189f6b4398e46cd5d'	
           		},
-          		'authorization': 'hallo'
+          		job: {
+          			position: 'Test'
+          		}
 			}
 		);
 	}
